@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StockIO.Model
 {
-    class Stocks
+    class Stock
     {
         public string ID { get; set; }
         public string Name { get; set; }
