@@ -24,7 +24,7 @@ namespace StockIO.Services
             if (Client?.SyncContext?.IsInitialized ?? false)
                 return;
 
-            var appUrl = "http://sockio.azurewebsites.net";
+            var appUrl = "https://sockio.azurewebsites.net";
 
             //Create our client
             Client = new MobileServiceClient(appUrl);
