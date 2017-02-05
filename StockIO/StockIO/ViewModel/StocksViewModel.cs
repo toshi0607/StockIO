@@ -9,10 +9,11 @@ using System.Collections.ObjectModel;
 using StockIO.Model;
 using Xamarin.Forms;
 using System.Diagnostics;
+using StockIO.Services;
 
 namespace StockIO.ViewModel
 {
-    class StocksViewModel : INotifyPropertyChanged
+    public class StocksViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Stock> Stocks { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
