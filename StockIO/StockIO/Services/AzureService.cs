@@ -47,7 +47,7 @@ namespace StockIO.Services
             table = Client.GetSyncTable<Stock>();
         }
 
-        public async Task<IEnumerable<Stock>> GetSpeakers()
+        public async Task<IEnumerable<Stock>> GetStocks()
         {
             await Initialize();
             await SyncStocks();

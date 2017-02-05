@@ -16,10 +16,14 @@ namespace StockIO.ViewModel
     public class StocksViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Stock> Stocks { get; set; }
+        public Command GetStocksCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public StocksViewModel()
         {
             Stocks = new ObservableCollection<Stock>();
+            GetStocksCommand = new Command(
+                async () => await GetStocks(),
+                () => !IsBusy);
         }
 
         void OnPropertyChanged([CallerMemberName] string name = null) =>
@@ -33,10 +37,12 @@ namespace StockIO.ViewModel
             {
                 busy = value;
                 OnPropertyChanged();
+                //Update the can execute
+                GetStocksCommand.ChangeCanExecute();
             }
         }
 
-        async Task GetSpeakers()
+        async Task GetStocks()
         {
             if (IsBusy)
                 return;
@@ -47,7 +53,7 @@ namespace StockIO.ViewModel
                 IsBusy = true;
 
                 var service = DependencyService.Get<AzureService>();
-                var items = await service.GetSpeakers();
+                var items = await service.GetStocks();
 
                 Stocks.Clear();
                 foreach (var item in items)
