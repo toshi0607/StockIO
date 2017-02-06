@@ -1,9 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StockIO.View.StocksPage>
+             x:Class="StockIO.View.StocksPage"
+             Title="Stocks">
   <StackLayout Spacing="0">
     <Button Text="Sync Stocks" Command="{Binding GetStocksCommand}"/>
     <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+    <ListView x:Name="ListViewStocks"
+              ItemsSource="{Binding Stocks}">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <TextCell Text="{Binding Name}"
+                    Detail="TBD"/>
+        </DataTemplate>
+      </ListView.ItemTemplate>      
+    </ListView>
   </StackLayout>
 </ContentPage>
