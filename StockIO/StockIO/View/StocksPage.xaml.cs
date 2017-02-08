@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
+using StockIO.ViewModel;
+
 namespace StockIO.View
 {
     public partial class StocksPage : ContentPage
     {
+        StocksViewModel vm;
         public StocksPage()
         {
             InitializeComponent();
+
+            vm = new StocksViewModel();
+
+            BindingContext = vm;
         }
     }
 }

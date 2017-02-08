@@ -24,13 +24,15 @@ namespace StockIO.Services
             if (Client?.SyncContext?.IsInitialized ?? false)
                 return;
 
-            var appUrl = "https://sockio.azurewebsites.net";
+            var appUrl = "http://stockio.azurewebsites.net";
 
             //Create our client
-            Client = new MobileServiceClient(appUrl);
+            //Client = new MobileServiceClient(appUrl);
 
-            //InitialzeDatabase for path
-            var path = "syncstore.db";
+            Client = new MobileServiceClient("https://stockio.azurewebsites.net");
+
+        //InitialzeDatabase for path
+        var path = "syncstore.db";
             path = Path.Combine(MobileServiceClient.DefaultDatabasePath, path);
 
 
