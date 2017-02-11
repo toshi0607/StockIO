@@ -40,6 +40,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AzureService.cs" />
     <Compile Include="ViewModel\StocksViewModel.cs" />
+    <Compile Include="View\StockEditPage.xaml.cs">
+      <DependentUpon>StockEditPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StocksPage.xaml.cs">
       <DependentUpon>StocksPage.xaml</DependentUpon>
     </Compile>
@@ -98,7 +101,12 @@
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="View\StockEditPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\StocksPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
