@@ -4,11 +4,11 @@
              x:Class="StockIO.View.StockEditPage">
   <StackLayout>
     <Label Text="管理したいものの名前"/>
-    <Entry Text="{Binding Name}"/>
+    <Entry x:Name="Name" Text="{Binding Name}"/>
     <Label Text="残り個数"/>
-    <Entry Text="{Binding Amount}" Keyboard="Numeric"/>
+    <Entry x:Name="Amount" Text="{Binding Amount}" Keyboard="Numeric"/>
     <Label Text="アラートを出す個数"/>
-    <Entry Text="{Binding ThresholdAmount}" Keyboard="Numeric"/>
+    <Entry x:Name="ThresholdAmount" Text="{Binding ThresholdAmount}" Keyboard="Numeric"/>
   </StackLayout>
 
 </ContentPage>
