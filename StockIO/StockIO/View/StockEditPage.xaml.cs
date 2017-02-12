@@ -28,7 +28,7 @@ namespace StockIO.View
             Name.Completed += Name_Completed;
             Amount.TextChanged += Amount_TextChanged;
             ThresholdAmount.TextChanged += ThresholdAmount_TextChanged;
-            UpdateButton.Clicked += OnButtonClicked;
+            SaveButton.Clicked += OnSaveButtonClicked;
 
         }
 
@@ -56,7 +56,7 @@ namespace StockIO.View
             return;
         }
 
-        private async void OnButtonClicked(object sender, EventArgs e)
+        private async void OnSaveButtonClicked(object sender, EventArgs e)
         {
             //if (this.preStock != this.stock)
             //{
