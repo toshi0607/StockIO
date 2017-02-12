@@ -60,11 +60,11 @@ namespace StockIO.View
         {
             //if (this.preStock != this.stock)
             //{
-                await UpdateStocks();
+                await SaveStocks();
             //}
         }
 
-        async Task UpdateStocks()
+        async Task SaveStocks()
         {
             Exception error = null;
             try
@@ -78,15 +78,18 @@ namespace StockIO.View
                 error = ex;
             }
 
+            var result = false;
             if (error != null)
             {
                 await Application.Current.MainPage.DisplayAlert("Error!", error.Message, "OK");
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("", "保存しました", "OK");
+                result = await Application.Current.MainPage.DisplayAlert("", "保存しました。一覧に戻りますか？", "はい", "いいえ");
             }
                 
+            if (result)
+                await Navigation.PushAsync(new StocksPage());
         }
     }
 }
