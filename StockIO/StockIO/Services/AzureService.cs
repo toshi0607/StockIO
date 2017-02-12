@@ -66,10 +66,17 @@ namespace StockIO.Services
 
         }
 
-        public async Task<IEnumerable<Stock>> UpdateStock(Stock item)
+        public async Task<IEnumerable<Stock>> SaveStock(Stock item)
         {
             await Initialize();
-            await table.UpdateAsync(item);
+            if (item.ID == null)
+            {
+                await table.InsertAsync(item);
+            }
+            else
+            {
+                await table.UpdateAsync(item);
+            }
             await SyncStocks();
             return await table.OrderBy(s => s.Name).ToEnumerableAsync();
         }

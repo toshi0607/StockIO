@@ -4,7 +4,19 @@
              x:Class="StockIO.View.StocksPage"
              Title="Stocks">
   <StackLayout Spacing="0">
-    <Button Text="Sync Stocks" Command="{Binding GetStocksCommand}"/>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <Button Text="Sync Stocks" Command="{Binding GetStocksCommand}"/>
+      <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+        <Button x:Name="CreateButton"
+                Text="アイテム追加"
+                MinimumHeightRequest="30"
+                Clicked="OnAdd" />
+      </StackLayout>
+    </Grid>
     <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
     <ListView x:Name="ListViewStocks"
               ItemsSource="{Binding Stocks}">

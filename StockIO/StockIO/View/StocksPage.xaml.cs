@@ -23,6 +23,7 @@ namespace StockIO.View
             BindingContext = vm;
 
             ListViewStocks.ItemSelected += ListViewStocks_ItemSelected;
+            CreateButton.Clicked += OnAdd; 
         }
 
         private async void ListViewStocks_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -35,6 +36,12 @@ namespace StockIO.View
 
             ListViewStocks.SelectedItem = null;
 
+        }
+
+        private async void OnAdd(object sender, EventArgs e)
+        {
+            var stock = new Stock();
+            await Navigation.PushAsync(new StockEditPage(stock));
         }
     }
 }
