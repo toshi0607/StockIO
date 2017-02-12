@@ -66,25 +66,13 @@ namespace StockIO.Services
 
         }
 
-        public async Task<IEnumerable<Stock>> UpdateStocks(Stock item)
+        public async Task<IEnumerable<Stock>> UpdateStock(Stock item)
         {
             await Initialize();
-            await SyncStocks2(item);
+            await table.UpdateAsync(item);
+            await SyncStocks();
             return await table.OrderBy(s => s.Name).ToEnumerableAsync();
         }
 
-        public async Task SyncStocks2(Stock item)
-        {
-            try
-            {
-                await Client.SyncContext.PushAsync();
-                await table.UpdateAsync(item);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Unable to sync stocks, that is alright as we have offline capabilities: " + ex);
-            }
-
-        }
     }
 }

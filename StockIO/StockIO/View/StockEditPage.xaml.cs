@@ -70,7 +70,7 @@ namespace StockIO.View
             try
             {
                 var service = DependencyService.Get<AzureService>();
-                var items = await service.UpdateStocks(this.stock);
+                await service.UpdateStock(this.stock);
             }
             catch (Exception ex)
             {
