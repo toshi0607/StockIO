@@ -84,7 +84,7 @@ namespace StockIO.View
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("", "更新しました", "OK");
+                await Application.Current.MainPage.DisplayAlert("", "保存しました", "OK");
             }
                 
         }

@@ -11,7 +11,7 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <TextCell Text="{Binding Name}"
-                    Detail="TBD"/>
+                    Detail="{Binding Amount}"/>
         </DataTemplate>
       </ListView.ItemTemplate>      
     </ListView>
