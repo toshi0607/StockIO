@@ -29,7 +29,10 @@ namespace StockIO.View
             Amount.TextChanged += Amount_TextChanged;
             ThresholdAmount.TextChanged += ThresholdAmount_TextChanged;
             SaveButton.Clicked += OnSaveButtonClicked;
+            DeleteButton.Clicked += OnDeleteButtonClicked;
 
+            if (item.ID == null)
+                DeleteButton.IsEnabled = false;
         }
 
         private void Name_Completed(object sender, EventArgs e)
@@ -56,15 +59,46 @@ namespace StockIO.View
             return;
         }
 
+        private async void OnDeleteButtonClicked(object sender, EventArgs e)
+        {
+            await DeleteStock();
+        }
+
+        async Task DeleteStock()
+        {
+            Exception error = null;
+            try
+            {
+                var service = DependencyService.Get<AzureService>();
+                await service.DeleteStock(this.stock);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex);
+                error = ex;
+            }
+
+            if (error != null)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error!", error.Message, "OK");
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("", "削除しました。", "OK");
+            }
+
+            await Navigation.PushAsync(new StocksPage());
+        }
+
         private async void OnSaveButtonClicked(object sender, EventArgs e)
         {
             //if (this.preStock != this.stock)
             //{
-                await SaveStocks();
+                await SaveStock();
             //}
         }
 
-        async Task SaveStocks()
+        async Task SaveStock()
         {
             Exception error = null;
             try

@@ -9,7 +9,14 @@
     <Entry x:Name="Amount" Text="{Binding Amount}" Keyboard="Numeric"/>
     <Label Text="アラートを出す個数"/>
     <Entry x:Name="ThresholdAmount" Text="{Binding ThresholdAmount}" Keyboard="Numeric"/>
-    <Button x:Name="SaveButton" Text="保存"/>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="1*"/>
+      </Grid.ColumnDefinitions>
+      <Button x:Name="DeleteButton" Text="削除" BackgroundColor="#D9534F"/>
+      <Button x:Name="SaveButton" Text="保存" Grid.Column="1"/>
+    </Grid>
   </StackLayout>
 
 </ContentPage>

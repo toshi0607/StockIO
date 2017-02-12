@@ -66,6 +66,14 @@ namespace StockIO.Services
 
         }
 
+        public async Task<IEnumerable<Stock>> DeleteStock(Stock item)
+        {
+            await Initialize();
+            await table.DeleteAsync(item);
+            await SyncStocks();
+            return await table.OrderBy(s => s.Name).ToEnumerableAsync();
+        }
+
         public async Task<IEnumerable<Stock>> SaveStock(Stock item)
         {
             await Initialize();
