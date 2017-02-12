@@ -26,6 +26,11 @@ namespace StockIO.View
             CreateButton.Clicked += OnAdd; 
         }
 
+        protected override async void OnAppearing()
+        {
+            vm.GetStocksCommand.Execute("");
+        }
+
         private async void ListViewStocks_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var stock = e.SelectedItem as Stock;
