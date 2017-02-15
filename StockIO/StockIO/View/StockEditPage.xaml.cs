@@ -66,6 +66,10 @@ namespace StockIO.View
 
         async Task DeleteStock()
         {
+            bool result = await Application.Current.MainPage.DisplayAlert("", "本当に削除しますか？", "はい", "いいえ");
+            if (!result)
+                return;
+
             Exception error = null;
             try
             {
