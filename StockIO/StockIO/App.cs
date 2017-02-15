@@ -13,7 +13,7 @@ namespace StockIO
         public App()
         {
             // The root page of your application
-            var content = new StocksPage();
+            var content = new TopTabbedPage();
 
             MainPage = new NavigationPage(content);
         }
