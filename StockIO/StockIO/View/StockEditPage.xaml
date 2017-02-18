@@ -4,18 +4,26 @@
              x:Class="StockIO.View.StockEditPage">
   <StackLayout>
     <Label Text="管理したいものの名前"/>
-    <Entry x:Name="Name" Text="{Binding Name}"/>
+    <Entry Text="{Binding Stock.Name}"/>
     <Label Text="残り個数"/>
-    <Entry x:Name="Amount" Text="{Binding Amount}" Keyboard="Numeric"/>
+    <Entry Text="{Binding Stock.Amount}" Keyboard="Numeric"/>
     <Label Text="アラートを出す個数"/>
-    <Entry x:Name="ThresholdAmount" Text="{Binding ThresholdAmount}" Keyboard="Numeric"/>
+    <Entry Text="{Binding Stock.ThresholdAmount}" Keyboard="Numeric"/>
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="1*"/>
         <ColumnDefinition Width="1*"/>
       </Grid.ColumnDefinitions>
-      <Button x:Name="DeleteButton" Text="削除" BackgroundColor="#D9534F"/>
-      <Button x:Name="SaveButton" Text="保存" Grid.Column="1"/>
+      <Button x:Name="DeleteButton"
+              IsEnabled="{Binding !IsBusy}"
+              Command="{Binding DeleteStockCommand}"
+              Text="削除"
+              BackgroundColor="#D9534F"/>
+      <Button x:Name="SaveButton"
+              IsEnabled="{Binding !IsBusy}"
+              Command="{Binding SaveStockCommand}"
+              Text="保存"
+              Grid.Column="1"/>
     </Grid>
   </StackLayout>
 
