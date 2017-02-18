@@ -26,7 +26,7 @@ namespace StockIO.View
             CreateButton.Clicked += OnAdd; 
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             vm.GetStocksCommand.Execute("");
         }
