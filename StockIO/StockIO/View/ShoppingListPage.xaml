@@ -11,17 +11,24 @@
         <DataTemplate>
           <ViewCell>
             <Grid>
-              <Grid.RowDefinitions>
-                <RowDefinition Height="20"></RowDefinition>
-                <RowDefinition Height="20"></RowDefinition>
-              </Grid.RowDefinitions>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
               </Grid.ColumnDefinitions>
-              <Label Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Font="Large" Text="{Binding Name}" LineBreakMode="TailTruncation"></Label>
-              <Label Grid.Row="0" Grid.Column="1" Text="{Binding Amount, StringFormat='あと{0}個'}"></Label>
-              <Label Grid.Row="1" Grid.Column="1" Text="{Binding ThresholdAmount, StringFormat='残り{0}個でお知らせ'}"></Label>
+              <Label Grid.Column="0"
+                     Font="Large"
+                     Text="{Binding Name}"
+                     LineBreakMode="TailTruncation"
+                     VerticalTextAlignment="Center"/>
+              <Label Grid.Column="1"
+                     BindingContext="{Reference amountStepper}"
+                     Text="{Binding Value, StringFormat='あと{0}個'}"
+                     VerticalTextAlignment="Center"
+                     HorizontalTextAlignment="End"/>
+              <Stepper x:Name="amountStepper"
+                       Grid.Column="2"
+                       Value="{Binding Amount}"/>
             </Grid>
           </ViewCell>
         </DataTemplate>
