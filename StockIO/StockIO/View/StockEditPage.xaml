@@ -47,6 +47,7 @@
               Text="保存"
               Grid.Column="1"/>
     </Grid>
+    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
   </StackLayout>
 
 </ContentPage>
