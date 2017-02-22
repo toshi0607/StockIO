@@ -11,8 +11,12 @@
         <ColumnDefinition Width="1*"/>
         <ColumnDefinition Width="1*"/>
       </Grid.ColumnDefinitions>
-      <Entry BindingContext="{x:Reference amountStepper}" Text="{Binding Value}" Keyboard="Numeric"/>
-      <Stepper Grid.Column="1" x:Name="amountStepper" Value="{Binding Stock.Amount}"/>
+      <Entry BindingContext="{x:Reference amountStepper}"
+             Text="{Binding Value}"
+             Keyboard="Numeric"/>
+      <Stepper x:Name="amountStepper"
+               Grid.Column="1"
+               Value="{Binding Stock.Amount}"/>
     </Grid>
     <Label Text="アラートを出す個数"/>
     <Grid>
@@ -20,8 +24,12 @@
         <ColumnDefinition Width="1*"/>
         <ColumnDefinition Width="1*"/>
       </Grid.ColumnDefinitions>
-      <Entry BindingContext="{x:Reference thresholdAmountStepper}" Text="{Binding Value}" Keyboard="Numeric"/>
-      <Stepper Grid.Column="1" x:Name="thresholdAmountStepper" Value="{Binding Stock.ThresholdAmount}"/>
+      <Entry BindingContext="{x:Reference thresholdAmountStepper}"
+             Text="{Binding Value}"
+             Keyboard="Numeric"/>
+      <Stepper x:Name="thresholdAmountStepper"
+               Grid.Column="1"
+               Value="{Binding Stock.ThresholdAmount}"/>
     </Grid>
     <Grid>
       <Grid.ColumnDefinitions>
