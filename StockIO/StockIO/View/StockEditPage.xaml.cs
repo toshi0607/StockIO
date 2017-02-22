@@ -17,11 +17,11 @@ namespace StockIO.View
 
             vm.OnUpdate += async () =>
             {
-                await Navigation.PushAsync(new StocksPage());
+                await Navigation.PushAsync(new TopTabbedPage());
             };
             vm.OnDelete += async () =>
             {
-                await Navigation.PushAsync(new StocksPage());
+                await Navigation.PushAsync(new TopTabbedPage());
             };
 
             BindingContext = vm;

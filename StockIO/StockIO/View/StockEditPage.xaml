@@ -6,9 +6,23 @@
     <Label Text="管理したいものの名前"/>
     <Entry Text="{Binding Stock.Name}"/>
     <Label Text="残り個数"/>
-    <Entry Text="{Binding Stock.Amount}" Keyboard="Numeric"/>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="1*"/>
+      </Grid.ColumnDefinitions>
+      <Entry BindingContext="{x:Reference amountStepper}" Text="{Binding Value}" Keyboard="Numeric"/>
+      <Stepper Grid.Column="1" x:Name="amountStepper" Value="{Binding Stock.Amount}"/>
+    </Grid>
     <Label Text="アラートを出す個数"/>
-    <Entry Text="{Binding Stock.ThresholdAmount}" Keyboard="Numeric"/>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="1*"/>
+      </Grid.ColumnDefinitions>
+      <Entry BindingContext="{x:Reference thresholdAmountStepper}" Text="{Binding Value}" Keyboard="Numeric"/>
+      <Stepper Grid.Column="1" x:Name="thresholdAmountStepper" Value="{Binding Stock.ThresholdAmount}"/>
+    </Grid>
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="1*"/>
