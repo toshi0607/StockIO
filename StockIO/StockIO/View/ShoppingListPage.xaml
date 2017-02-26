@@ -4,7 +4,6 @@
              x:Class="StockIO.View.ShoppingListPage"
              Title ="Shopping List">
   <StackLayout>
-    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
     <ListView x:Name="ListViewStocks"
               ItemsSource="{Binding Stocks}">
       <ListView.ItemTemplate>
@@ -37,5 +36,6 @@
         </DataTemplate>
       </ListView.ItemTemplate>      
     </ListView>
+    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
   </StackLayout>
 </ContentPage>
