@@ -29,6 +29,7 @@ namespace StockIO.ViewModel
             IncrementStockCommand = new Command(
                 async (item) => await IncrementStock((Stock)item),
                 (_) => !IsBusy);
+            IsEmpty = false;
         }
 
         void OnPropertyChanged([CallerMemberName] string name = null) =>
@@ -45,6 +46,17 @@ namespace StockIO.ViewModel
                 //Update the can execute
                 GetStocksCommand.ChangeCanExecute();
                 IncrementStockCommand.ChangeCanExecute();
+            }
+        }
+
+        bool empty;
+        public bool IsEmpty
+        {
+            get { return empty; }
+            set
+            {
+                empty = value;
+                OnPropertyChanged();
             }
         }
 
@@ -65,6 +77,9 @@ namespace StockIO.ViewModel
                 Stocks.Clear();
                 foreach (var item in items)
                     Stocks.Add(item);
+
+                if (items.Count() == 0)
+                    IsEmpty = true;
             }
             catch (Exception ex)
             {

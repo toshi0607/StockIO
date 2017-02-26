@@ -4,38 +4,43 @@
              x:Class="StockIO.View.ShoppingListPage"
              Title ="Shopping List">
   <StackLayout>
-    <ListView x:Name="ListViewStocks"
-              ItemsSource="{Binding Stocks}">
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell>
-            <Grid x:Name="Item">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-              </Grid.ColumnDefinitions>
-              <Label Grid.Column="0"
-                     Font="Large"
-                     Text="{Binding Name}"
-                     LineBreakMode="TailTruncation"
-                     VerticalTextAlignment="Center"/>
-              <Label Grid.Column="1"
-                     Text="{Binding Amount, StringFormat='あと{0}個'}"
-                     VerticalTextAlignment="Center"
-                     HorizontalTextAlignment="Start"/>
-              <Button Text="+"
-                      Grid.Column="2"
-                      BindingContext="{Binding Source={x:Reference ListViewStocks}, Path=BindingContext, Mode=TwoWay}"
-                      IsEnabled="{Binding !IsBusy}"
-                      Command="{Binding IncrementStockCommand}"
-                      CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                      />           
-            </Grid>
-          </ViewCell>
-        </DataTemplate>
-      </ListView.ItemTemplate>      
-    </ListView>
-    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+    <Grid>
+      <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="今買わないといけないものはありません！" IsVisible="{Binding IsEmpty}"/>
+      <StackLayout>
+        <ListView x:Name="ListViewStocks"
+                  ItemsSource="{Binding Stocks}">
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <Grid x:Name="Item">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                  </Grid.ColumnDefinitions>
+                  <Label Grid.Column="0"
+                         Font="Large"
+                         Text="{Binding Name}"
+                         LineBreakMode="TailTruncation"
+                         VerticalTextAlignment="Center"/>
+                  <Label Grid.Column="1"
+                         Text="{Binding Amount, StringFormat='あと{0}個'}"
+                         VerticalTextAlignment="Center"
+                         HorizontalTextAlignment="Start"/>
+                  <Button Text="+"
+                          Grid.Column="2"
+                          BindingContext="{Binding Source={x:Reference ListViewStocks}, Path=BindingContext, Mode=TwoWay}"
+                          IsEnabled="{Binding !IsBusy}"
+                          Command="{Binding IncrementStockCommand}"
+                          CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                        />
+                </Grid>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+      </StackLayout>
+    </Grid>
   </StackLayout>
 </ContentPage>
