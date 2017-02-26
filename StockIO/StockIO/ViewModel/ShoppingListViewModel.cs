@@ -17,6 +17,7 @@ namespace StockIO.ViewModel
     {
         public ObservableCollection<Stock> Stocks { get; set; }
         public Command GetStocksCommand { get; set; }
+        public Command IncrementStockCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ShoppingListViewModel()
@@ -25,6 +26,9 @@ namespace StockIO.ViewModel
             GetStocksCommand = new Command(
                 async () => await GetStocks(),
                 () => !IsBusy);
+            IncrementStockCommand = new Command(
+                async (item) => await IncrementStock((Stock)item),
+                (_) => !IsBusy);
         }
 
         void OnPropertyChanged([CallerMemberName] string name = null) =>
@@ -40,6 +44,7 @@ namespace StockIO.ViewModel
                 OnPropertyChanged();
                 //Update the can execute
                 GetStocksCommand.ChangeCanExecute();
+                IncrementStockCommand.ChangeCanExecute();
             }
         }
 
@@ -74,5 +79,40 @@ namespace StockIO.ViewModel
             if (error != null)
                 await Application.Current.MainPage.DisplayAlert("Error!", error.Message, "OK");
         }
+
+        async Task IncrementStock(Stock item)
+        {
+            item.Amount += 1;
+
+            if (IsBusy)
+                return;
+
+            Exception error = null;
+            try
+            {
+                IsBusy = true;
+
+                var service = DependencyService.Get<AzureService>();
+                await service.SaveStock(item);
+
+                IsBusy = false;
+                await GetStocks();
+
+                if (error != null)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error!", error.Message, "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex);
+                error = ex;
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
     }
 }
