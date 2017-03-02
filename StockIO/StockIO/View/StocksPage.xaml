@@ -5,39 +5,44 @@
              Title="Stocks">
   <StackLayout Spacing="0">
     <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="1*"/>
-        <ColumnDefinition Width="1*"/>
-      </Grid.ColumnDefinitions>
-      <Button Text="Sync Stocks" Command="{Binding GetStocksCommand}"/>
-      <Button x:Name="CreateButton"
-                Text="アイテム追加"
-                Grid.Column="1"
-                MinimumHeightRequest="30"
-                Clicked="OnAdd" />
+      <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="管理したいアイテムを追加しましょう！" IsVisible="{Binding IsEmpty}"/>
+      <StackLayout>
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+          </Grid.ColumnDefinitions>
+          <Button Text="Sync Stocks" Command="{Binding GetStocksCommand}"/>
+          <Button x:Name="CreateButton"
+                    Text="アイテム追加"
+                    Grid.Column="1"
+                    MinimumHeightRequest="30"
+                    Clicked="OnAdd" />
+        </Grid>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+        <ListView x:Name="ListViewStocks"
+                  ItemsSource="{Binding Stocks}">
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <Grid>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="120"></ColumnDefinition>
+                  </Grid.ColumnDefinitions>
+                  <Label Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Font="Large" Text="{Binding Name}" LineBreakMode="TailTruncation"></Label>
+                  <Label Grid.Row="0" Grid.Column="1" Text="{Binding Amount, StringFormat='あと{0}個'}"></Label>
+                  <Label Grid.Row="1" Grid.Column="1" Text="{Binding ThresholdAmount, StringFormat='残り{0}個でお知らせ'}"></Label>
+                </Grid>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>      
+        </ListView>
+      </StackLayout>
     </Grid>
-    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
-    <ListView x:Name="ListViewStocks"
-              ItemsSource="{Binding Stocks}">
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <ViewCell>
-            <Grid>
-              <Grid.RowDefinitions>
-                <RowDefinition Height="20"></RowDefinition>
-                <RowDefinition Height="20"></RowDefinition>
-              </Grid.RowDefinitions>
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="120"></ColumnDefinition>
-              </Grid.ColumnDefinitions>
-              <Label Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Font="Large" Text="{Binding Name}" LineBreakMode="TailTruncation"></Label>
-              <Label Grid.Row="0" Grid.Column="1" Text="{Binding Amount, StringFormat='あと{0}個'}"></Label>
-              <Label Grid.Row="1" Grid.Column="1" Text="{Binding ThresholdAmount, StringFormat='残り{0}個でお知らせ'}"></Label>
-            </Grid>
-          </ViewCell>
-        </DataTemplate>
-      </ListView.ItemTemplate>      
-    </ListView>
   </StackLayout>
 </ContentPage>
