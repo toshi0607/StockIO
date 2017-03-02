@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:StockIO.Behaviors"
              x:Class="StockIO.View.StockEditPage">
   <StackLayout>
     <Label Text="管理したいものの名前"/>
@@ -13,7 +14,11 @@
       </Grid.ColumnDefinitions>
       <Entry BindingContext="{x:Reference amountStepper}"
              Text="{Binding Value}"
-             Keyboard="Numeric"/>
+             Keyboard="Numeric">
+        <Entry.Behaviors>
+          <local:MaxLengthValidator MaxLength="3"/>
+        </Entry.Behaviors>
+      </Entry>
       <Stepper x:Name="amountStepper"
                Grid.Column="1"
                Value="{Binding Stock.Amount}"/>
@@ -26,7 +31,11 @@
       </Grid.ColumnDefinitions>
       <Entry BindingContext="{x:Reference thresholdAmountStepper}"
              Text="{Binding Value}"
-             Keyboard="Numeric"/>
+             Keyboard="Numeric">
+        <Entry.Behaviors>
+          <local:MaxLengthValidator MaxLength="3"/>
+        </Entry.Behaviors>
+      </Entry>
       <Stepper x:Name="thresholdAmountStepper"
                Grid.Column="1"
                Value="{Binding Stock.ThresholdAmount}"/>
