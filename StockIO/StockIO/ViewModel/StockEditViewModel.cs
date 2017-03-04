@@ -68,6 +68,7 @@ namespace StockIO.ViewModel
                 }
                 else
                 {
+                    IsBusy = false;
                     result = await Application.Current.MainPage.DisplayAlert("", "保存しました。一覧に戻りますか？", "はい", "いいえ");
                 }
 
@@ -108,6 +109,7 @@ namespace StockIO.ViewModel
                 }
                 else
                 {
+                    IsBusy = false;
                     await Application.Current.MainPage.DisplayAlert("", "削除しました。", "OK");
                 }
 
