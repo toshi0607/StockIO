@@ -13,11 +13,10 @@ using StockIO.Services;
 
 namespace StockIO.ViewModel
 {
-    public class StocksViewModel : INotifyPropertyChanged
+    public class StocksViewModel : BindableBase
     {
         public ObservableCollection<Stock> Stocks { get; set; }
         public Command GetStocksCommand { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
         public StocksViewModel()
         {
             Stocks = new ObservableCollection<Stock>();
@@ -27,16 +26,13 @@ namespace StockIO.ViewModel
             IsEmpty = false;
         }
 
-        void OnPropertyChanged([CallerMemberName] string name = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
         bool busy;
         public bool IsBusy
         {
             get { return busy; }
             set
             {
-                busy = value;
+                SetProperty(ref busy, value);
                 OnPropertyChanged();
                 //Update the can execute
                 GetStocksCommand.ChangeCanExecute();
