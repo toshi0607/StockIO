@@ -11,12 +11,11 @@ using StockIO.Model;
 
 namespace StockIO.ViewModel
 {
-    class StockEditViewModel : INotifyPropertyChanged
+    class StockEditViewModel : BindableBase
     {
         public Stock Stock { set; get; }
         public Command SaveStockCommand { get; set; }
         public Command DeleteStockCommand { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
         public Action OnUpdate;
         public Action OnDelete;
 
@@ -31,16 +30,13 @@ namespace StockIO.ViewModel
                 () => !IsBusy);
         }
 
-        void OnPropertyChanged([CallerMemberName] string name = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
         bool busy;
         public bool IsBusy
         {
             get { return busy; }
             set
             {
-                busy = value;
+                SetProperty(ref busy, value);
                 OnPropertyChanged();
                 //Update the can execute
                 SaveStockCommand.ChangeCanExecute();
