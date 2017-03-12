@@ -4,6 +4,8 @@
              x:Class="StockIO.View.ShoppingListPage"
              Title ="Shopping List">
   <StackLayout>
+    <Button x:Name="loginButton" Text="Sign-in" MinimumHeightRequest="30"
+     Clicked="loginButton_Clicked"/>
     <Grid>
       <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="今買わないといけないものはありません！" IsVisible="{Binding IsEmpty}"/>
       <StackLayout>

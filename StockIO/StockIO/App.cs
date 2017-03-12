@@ -1,15 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Threading.Tasks;
+
 using StockIO.View;
 
 using Xamarin.Forms;
 
 namespace StockIO
 {
+    public interface IAuthenticate
+    {
+        Task<bool> Authenticate();
+    }
     public class App : Application
     {
+        public static IAuthenticate Authenticator { get; private set; }
+
+        public static void Init(IAuthenticate authenticator)
+        {
+            Authenticator = authenticator;
+        }
+        
         public App()
         {
             // The root page of your application

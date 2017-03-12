@@ -13,6 +13,8 @@ namespace StockIO.View
 {
     public partial class ShoppingListPage : ContentPage
     {
+        // Track whether the user has authenticated.
+        bool authenticated = false;
         ShoppingListViewModel vm;
         public ShoppingListPage()
         {
@@ -25,7 +27,18 @@ namespace StockIO.View
 
         protected override void OnAppearing()
         {
-            vm.GetStocksCommand.Execute("");
+            if (authenticated == true)
+                vm.GetStocksCommand.Execute("");
+        }
+
+        async void loginButton_Clicked(object sender, EventArgs e)
+        {
+            if (App.Authenticator != null)
+                authenticated = await App.Authenticator.Authenticate();
+
+            // Set syncItems to true to synchronize the data on startup when offline is enabled.
+            if (authenticated == true)
+                vm.GetStocksCommand.Execute("");
         }
     }
 }
